@@ -1,0 +1,75 @@
+* {
+	font-family: "Avenir next", sans-serif;
+	color: white;
+	background-color: black;
+	margin: 0px;
+	padding: 0px;
+}	
+button {
+	border-radius: 5px;
+	padding: 4px 8px;
+	margin: 2px;
+}
+button:hover {
+	background-color: white;
+	color: black;
+}
+.buttons {
+	position: fixed;
+	/*height: 60px;*/
+	/*overflow: hidden;*/
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	text-align: center;
+	/*margin: 10px;*/
+	display: none;
+	z-index: 10;
+	background-color: rgba(255,255,255,0.5);
+}
+.external_container {
+	position: absolute;
+	height: calc(100% - 100px);
+	width: 100%;
+	z-index: -1;
+}
+.content {
+	font-size: 60px;
+	height: 100%;
+	/*overflow: hidden;*//*scroll;*/
+	margin: 20px; 
+	border: 5px solid transparent;
+	padding: 20px;
+	border-radius: 10px;
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+.solo {
+	border: 5px dotted magenta;
+}
+.duo {
+	border: 5px double cyan;
+}
+.trio {
+	border: 5px dashed yellow;
+}
+.none {
+	border: 5px solid transparent;
+}
+.gray {
+	border: 5px solid darkgray;
+}
+.simple {
+	border: 1px solid white;
+}
+.slider {
+	top: 8px;
+	position: relative;
+	left: 5px;
+}
+
+#id, #users {
+	width: 100px;
+	background-color: transparent;
+	border: 0px;
+}

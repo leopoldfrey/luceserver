@@ -1,0 +1,29 @@
+{
+  "name": "LuceServer",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "Luce is a DMX/Artnet Lightning Control Application",
+  "keywords": [
+    "dmx",
+    "lightning app",
+    "artnet"
+  ],
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@shopify/draggable": "^1.0.0-beta.8",
+    "abletonlink": "0.0.7",
+    "artnet": "^1.4.0",
+    "dmx": "^0.2.2",
+    "dmx-web": "^1.0.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "interactjs": "^1.4.0-rc.13",
+    "muuri": "^0.8.0",
+    "react-draggable": "^4.0.3",
+    "serve-index": "latest",
+    "shortid": "^2.2.15",
+    "ws": "latest"
+  }
+}

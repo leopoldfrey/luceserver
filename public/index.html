@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="js/ws.js"></script>
+	<link href="js/style.css" rel="stylesheet">
+	<script>
+		var id;
+
+		function connectToWS() {
+	        // Connect to websocket server
+	        ws = new WebSocket(wsServer);
+
+	        // Log messages from the server
+	        ws.onmessage = function (e) {
+	            //alert("WebSocket Received : "+e.data);
+	            //console.log("| WS Received message: " + e.data);
+	            var reply = JSON.parse(e.data);
+	            
+	            console.log("* Command: "+reply.command);
+
+	            switch(reply.command)
+	            {
+	            	case "id" :
+		            	id = reply.id;
+		            	$('#id').val(id);
+		            	break;
+		            case "whosthere" :
+		            	ws.send(
+          					JSON.stringify({
+	            				charset : 'utf8mb4', 
+	            				command: "imthere",
+	            				to: reply.replyTo,
+	            				type: "user",
+	            				id: id
+        				}));
+		            	break;
+		            case "reset" :
+		            	reset();
+		            	break;
+	                case "start" :
+		            	doScroll();
+		            	break;
+	                case "stop" :
+		            	stop();
+		            	break;
+	                case "clear" :
+		            	doClear();
+		            	break;
+		            case "refresh" :
+		            	refresh();
+		            	break;
+	                /*case "fullscreen" :
+		            	fullscreen();
+		            	break;//*/
+	                case "load" :
+		            	load(reply.filename);
+		            	break;
+	                case "fontsize" :
+		            	setFontsize(reply.fontsize);
+		            	break;
+	                case "speed" :
+		            	setSpeed(reply.speed);
+		            	break;
+		            case "waitTime" :
+		            	waitTime = reply.time;
+		            	break;
+		            case "resetTime" :
+		            	resetTime = reply.time;
+		            	break;
+		            case "mode" :
+		            	setMode(reply.mode);
+
+	            }
+	        };
+
+	        // Log errors
+	        ws.onerror = function (error) {
+	        	//alert("WebSocket Error " + error);
+	            console.error("WebSocket Error " + error.stack);
+	        };
+
+	        ws.onopen = function (event) {
+	            //alert("WebSocket Opened");
+	            console.log("- Connected to ws server");
+	            ws.send(JSON.stringify(
+					{
+						charset : 'utf8mb4', 
+						command: "newUser"
+					}));
+
+	        };
+	    }
+	</script>
+</head>
+<body>
+	<h1>Welcome to Luce</h1>
+	<!--div class='buttons'>
+		<button onclick="reset()">reset</button>
+		<button onclick="stop()">stop</button>
+		<button onclick="doScroll()">scroll</button>
+		<button onclick="refresh()">refresh</button>
+		<button onclick="fullscreen()">fullscreen</button>
+		<br/>
+		<span style='font-size: 10px; background-color: transparent;'>speed</span>
+		<input type="range" min="0" max="22" value="0" class="slider" id="speed">
+		&nbsp;&nbsp;
+		<span style='font-size: 10px; background-color: transparent;'>size</span>
+		<input type="range" min="10" max="100" value="60" class="slider" id="fontsize">
+		<br/>
+		<button onclick="doClear()">clear</button>
+		&nbsp;&nbsp;
+		<button onclick="load('textes/texte1.txt')">txt1</button>
+		<button onclick="load('textes/texte2.txt')">txt2</button>
+		<button onclick="load('textes/texte3.txt')">txt3</button>
+		<button onclick="load('textes/texte4.txt')">txt4</button>
+		<button onclick="load('textes/texte5.txt')">txt5</button>
+		<button onclick="load('textes/texte6.txt')">txt6</button>
+		<br/>
+		<button onclick="setMode('none'); ">none</button>
+		<button onclick="setMode('simple')">simple</button>
+		<button onclick="setMode('gray')">gray</button>
+		<button onclick="setMode('solo')">solo</button>
+		<button onclick="setMode('duo')">duo</button>
+		<button onclick="setMode('trio')">trio</button>
+		<br/>
+		<input type="text" value="" id="id" disabled></input>
+	</div>
+
+	<div class='external_container'>
+		<div class='content'>
+			<div id='start'></div>
+			<div id='txt'></div>
+			<div id='end'></div>
+		</div>
+	</div-->
+	<script type="text/javascript">
+
+		/*var speedBut = $('#speed');
+		var fontsizeBut = $('#fontsize');
+		var fontsize = 60;
+		var container = $('.content');
+		var start = $('#start');
+		var txt = $('#txt')
+	    var end = $('#end');
+	    var buttons = $('.buttons');
+		var spds = [ 50, 30, 20, 15, 10, 9, 8, 7, 6, 5, 4, 3, 2.5, 2, 1.75, 1.5, 1.25, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1];
+		var spdIndex = 0;
+		speedBut.attr("max", spds.length-1);
+		speedBut.val(spdIndex);
+			
+	    var filename = "texte1.txt";
+	    var scrollTo = end;
+	    var pixToScroll = 0;
+	    var befScrollWait = 2000;
+	    var resetTime = 200;
+	    var buttonsVisible = false;
+	    var playing = false;
+
+	    function setFontsize(i) {
+	    	fontsize = i;
+	    	if(fontsize < 10)
+	    		fontsize = 10;
+	    	if(fontsize >= 100)
+	    		fontsize = 100;
+	    	fontsizeBut.val(fontsize);
+	    	container.css({ 'font-size': fontsize+"px" });
+	    	doScroll();
+			hideOptions();
+	    }
+
+	    function setSpeed(i) {
+	    	spdIndex = i;
+	    	if(spdIndex < 0)
+  				spdIndex = 0;
+  			if(spdIndex >= spds.length)
+  				spdIndex = spds.length-1;
+  			//console.log("SET SPEED idx:"+spdIndex+" val:"+spds[spdIndex]);
+	    	speedBut.val(spdIndex);
+			doScroll();
+			hideOptions();
+	    }
+
+		function finished(){
+			console.log("FINISHED");
+			playing = false;
+			container.stop();
+			ws.send(JSON.stringify(
+			{
+				charset : 'utf8mb4', 
+				command: "finished",
+				id: id
+			}));
+		}
+
+		function reset() {
+			//console.log("RESET");
+			container.stop();
+			scrollTo = start;
+			pixToScroll = scrollTo.offset().top - container.offset().top + container.scrollTop();
+	    	//console.log("pixToScroll : "+pixToScroll);
+	    		
+			container.animate({
+				scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
+			}, resetTime, "linear");
+			hideOptions();
+			playing = false;
+		}
+
+		function stop() {
+			container.stop();
+			hideOptions();
+			playing = false;
+		}
+
+		function doScroll() {
+			//console.log("DO SCROLL");
+			container.stop();
+			scrollTo = end;
+			//alert("Scroll to "+end);
+			pixToScroll = scrollTo.offset().top - container.offset().top + container.scrollTop();
+	    	//console.log("pixToScroll : "+pixToScroll);
+	    		
+			container.animate({
+				scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
+			}, pixToScroll * spds[spdIndex], "linear", finished);
+			hideOptions();
+			playing = true;
+		}
+
+		function load(fn) {
+			var xmlReq = new XMLHttpRequest();
+			filename = fn;
+			xmlReq.open('GET', filename);
+			xmlReq.setRequestHeader('Cache-Control', 'no-cache');
+    		xmlReq.onloadend = function() {
+				container.stop();
+				console.log(filename+" loaded.");
+				reset();
+				txt.empty();
+				t = xmlReq.responseText.replace(/\n/g, "<br/>");
+				t = t.replace(/{r:/g, "<span style='color:red;'>");
+				t = t.replace(/{g:/g, "<span style='color:lime;'>");
+				t = t.replace(/{b:/g, "<span style='color:deepskyblue;'>");
+				t = t.replace(/{c:/g, "<span style='color:cyan;'>");
+				t = t.replace(/{m:/g, "<span style='color:magenta;'>");
+				t = t.replace(/{y:/g, "<span style='color:yellow;'>");
+				t = t.replace(/{p:/g, "<span style='color:deeppink;'>");
+				t = t.replace(/{o:/g, "<span style='color:darkorange;'>");
+				t = t.replace(/{t:/g, "<span style='color:turquoise;'>");
+				t = t.replace(/{v:/g, "<span style='color:blueviolet;'>");
+				t = t.replace(/}/g, "</span>");
+				txt.append(t);
+				setTimeout(function() {
+					doScroll();
+				}, befScrollWait);
+				
+			}
+			xmlReq.send();
+			hideOptions();
+		}
+
+		function setMode(m) {
+			//console.log("mode : "+m);
+			container.removeClass("solo duo trio none gray simple");
+			container.addClass(m);
+			hideOptions();
+		}
+
+		function doClear() {
+			//console.log("CLEAR");
+			container.stop();
+			container.removeClass("solo duo trio none gray simple");
+			reset();
+			txt.empty();
+			hideOptions();
+			playing = false;
+		}
+
+		function refresh() {
+			location.reload();
+		}
+
+		function hideOptions() {
+			if(buttonsVisible)
+			{
+				buttonsVisible = false;
+				buttons.hide();
+			}
+		}
+
+		function key(k) {
+			switch(k)
+			{
+				case 'o':
+  					if(buttonsVisible)
+  						buttons.hide();
+  					else
+  						buttons.show();
+  					buttonsVisible = !buttonsVisible;
+  					break;
+  				case ' ':
+  					if(playing)
+  						stop();
+  					else
+	  					doScroll();
+  					break;
+  				case 'r':
+  				case 'Escape':
+  					reset();
+  					break;
+  				case 'C':
+  					doClear();
+  					break;
+  				case 'q':
+  					setSpeed(parseInt(spdIndex)-1);
+	    			break;
+  				case 's':
+  					setSpeed(parseInt(spdIndex)+1);
+	    			break;
+  				case 'w':
+  					setFontsize(parseInt(fontsize)-1);
+	    			break;
+  				case 'x':
+  					setFontsize(parseInt(fontsize)+1);
+	    			break;
+	    		case 'f':
+	    			fullscreen();
+	    			break;
+  				default:
+  					console.log("KEY : "+k);
+  					break;
+  			}
+		}
+
+		//load('textes/texte2.txt');
+
+		container.on('scroll touchmove mousewheel', function(e){
+		  e.preventDefault();
+		  e.stopPropagation();
+		  return false;
+		})
+
+		$('html').keyup(function(event) {
+			key(event.key);
+		});
+		buttons.keyup(function(event) {
+			key(event.key);
+		});
+		container.keyup(function(event) {
+			key(event.key);
+		});
+		txt.keyup(function(event) {
+			key(event.key);
+		});
+		speedBut.keyup(function(event) {
+			key(event.key);
+		});
+		fontsizeBut.keyup(function(event) {
+			key(event.key);
+		});
+		speedBut.on("change", function(){
+			//console.log("SPEED BUT : "+$(this).val());
+			spdIndex = $(this).val();
+			setSpeed(spdIndex);
+		});
+		fontsizeBut.on("change", function(){
+			fontsize = $(this).val();
+			setFontsize(fontsize);
+		});
+
+		container.on("click", function() {
+			if(playing)
+				stop();
+			else
+				doScroll();
+		});
+		container.on( 'scroll', function(){
+   			//container.stop();
+		//	console.log('Event Fired');
+		});//*/
+
+		function requestFullScreen(element) {
+		    // Supports most browsers and their versions.
+		    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+		    if (requestMethod) { // Native full screen.
+		        requestMethod.call(element);
+		    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+		        var wscript = new ActiveXObject("WScript.Shell");
+		        if (wscript !== null) {
+		            wscript.SendKeys("{F11}");
+		        }
+		    }
+		}
+
+    	function fullscreen() {
+	        var elem = document.body; // Make the body go full screen.
+			requestFullScreen(elem);
+	    }
+
+		connectToWS();
+	</script>
+</body>
+</html>
+
