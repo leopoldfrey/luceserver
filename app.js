@@ -1,4 +1,4 @@
-var express     	= require("express");
+/*var express     	= require("express");
 var http        	= require("http");
 var serveIndex  	= require("serve-index");
 var WebSocket   	= require("ws");
@@ -6,8 +6,6 @@ var WebSocketServer	= WebSocket.Server;
 var app         	= express();
 var server 			  = http.createServer(app);
 var shortid       = require('shortid');
-
-/* PARAMETERS */
 
 // use alternate localhost and the port Heroku assigns to $PORT
 const port = process.env.PORT || 4000;
@@ -20,16 +18,8 @@ app.get('/index.html',function(req,res){
       res.sendFile(__dirname + "/public/index.html");
 });
 
-/*
-app.get('/test.html',function(req,res){
-      res.sendFile(__dirname + "/public/test.html");
-});
+//----------- Static Files -----------
 
-app.get('/controller.html',function(req,res){
-      res.sendFile(__dirname + "/public/controller.html");
-});//*/
-
-/*----------- Static Files -----------*/
 app.use('/js', express.static('public/js'));
 //app.use('/textes', express.static('public/textes'));
 //app.use('/textes', serveIndex(__dirname + '/textes'));
@@ -38,7 +28,7 @@ server.listen(port,function() {
     console.log("| Web Server listening port " + port);
 });
 
-/*-------- USERS -------*/
+//-------- USERS ------
 var users = [];
 
 function newId() {
@@ -47,7 +37,7 @@ function newId() {
   return u;
 }
 
-/*----------- WS Server -----------*/
+//----------- WS Server -----------
 
 const wss = new WebSocketServer({
     server: server,
@@ -60,7 +50,7 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
     console.log('| WebSocket received : %s', message);
 
-    /*var input = JSON.parse(message);
+    var input = JSON.parse(message);
     
     switch(input.command) {
       case "newController":
@@ -73,205 +63,149 @@ wss.on('connection', function connection(ws) {
             id: id
         }));
         break;
-      case "newUser":
-        id = newId();
-        //console.log("New User ["+id+"]");
-        ws.send(
-          JSON.stringify({
-            charset : 'utf8mb4', 
-            command: "id",
-            id: id
-        }));
-        break;
-      case "clear":
-        //console.log("TODO Clear");
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(
-              JSON.stringify(
-              {
-                charset : 'utf8mb4', 
-                command: "clear"
-              }));
-          });
-        }
-        break;
-      case "start":
-        //console.log("TODO Start");
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(
-              JSON.stringify(
-              {
-                charset : 'utf8mb4', 
-                command: "start"
-              }));
-          });
-        }
-        break;
-      case "stop":
-        //console.log("TODO Stop");
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(
-              JSON.stringify(
-              {
-                charset : 'utf8mb4', 
-                command: "stop"
-              }));
-          });
-        }
-        break;
-      case "reset":
-        //console.log("TODO Reset");
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(
-              JSON.stringify(
-              {
-                charset : 'utf8mb4', 
-                command: "reset"
-              }));
-          });
-        }
-        break;
-      case "load":
-        //console.log("TODO Load "+input.filename);
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(
-              JSON.stringify(
-              {
-                charset : 'utf8mb4', 
-                command: "load",
-                filename: input.filename
-              }));
-          });
-        }
-        break;
-      case "fontsize":
-        //console.log("TODO Fontsize "+input.fontsize);
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(
-              JSON.stringify(
-              {
-                charset : 'utf8mb4', 
-                command: "fontsize",
-                fontsize: input.fontsize
-              }));
-          });
-        }
-        break;
-      case "speed":
-        //console.log("TODO Speed "+input.speed);
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(
-              JSON.stringify(
-              {
-                charset : 'utf8mb4', 
-                command: "speed",
-                speed: input.speed
-              }));
-          });
-        }
-        break;
-      case "mode":
-        //console.log("TODO mode "+input.mode);
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(
-              JSON.stringify(
-              {
-                charset : 'utf8mb4', 
-                command: "mode",
-                mode: input.mode
-              }));
-          });
-        }
-        break;
-      case "resetTime":
-        //console.log("TODO resetTime "+input.time);
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(
-              JSON.stringify(
-              {
-                charset : 'utf8mb4', 
-                command: "resetTime",
-                time: input.time
-              }));
-          });
-        }
-        break;
-      case "waitTime":
-        //console.log("TODO waitTime "+input.time);
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(
-              JSON.stringify(
-              {
-                charset : 'utf8mb4', 
-                command: "waitTime",
-                time: input.time
-              }));
-          });
-        }
-        break;
-      case "getUsers":
-        //console.log("TODO getUsers");
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(
-              JSON.stringify(
-              {
-                charset : 'utf8mb4', 
-                command: "whosthere",
-                replyTo: input.id
-              }));
-          });
-        }
-        break;
-      case "imthere":
-        //console.log("TODO getUsers");
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(JSON.stringify(input));
-          });
-        }
-        break;
-      case "refresh":
-        //console.log("TODO getUsers");
-        if(wss)
-        {
-          wss.clients.forEach(function each(client) {
-            client.send(JSON.stringify(
-              {
-                charset : 'utf8mb4', 
-                command: "refresh"
-              }));
-          });
-        }
-        break;
-      case "finished":
-        console.log("TODO finished "+input.id);
-        break;
       default:
   			console.log('* ignored : '+input);
   			break;
-    }//*/
+    }
   });
 });
+//*/
+
+//#!/usr/bin/env node
+const fs = require('fs');
+const http = require('http');
+const body = require('body-parser');
+const express = require('express');
+const socketio = require('socket.io');
+const program = require('commander');
+const DMX = require('@node-dmx/dmx-library');
+const A = DMX.Animation;
+
+program
+  .version('0.0.1')
+  .option('-c, --config <file>', 'Read config from file [dmx-web.json]', 'dmx-web.json')
+  .parse(process.argv);
+
+const config = JSON.parse(fs.readFileSync(program.config, 'utf8'));
+
+function DMXWeb() {
+  const app = express();
+  const server = http.createServer(app);
+  const io = socketio.listen(server);
+
+  const dmx = new DMX(config);
+
+  for (const universe in config.universes) {
+    console.log("Adding universe : "+universe)
+    dmx.addUniverse(
+      universe,
+      config.universes[universe].output.driver,
+      config.universes[universe].output.device,
+      config.universes[universe].output.options
+    );
+  }
+
+  const listenPort = config.server.listen_port || 8080;
+  const listenHost = config.server.listen_host || '::';
+
+  server.listen(listenPort, listenHost, null, () => {
+    if (config.server.uid && config.server.gid) {
+      try {
+        process.setuid(config.server.uid);
+        process.setgid(config.server.gid);
+      } catch (err) {
+        console.log(err);
+        process.exit(1);
+      }
+    }
+  });
+
+  app.use(body.json());
+
+  app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/index2.html');
+  });
+
+  app.get('/config', (req, res) => {
+    const response = {'devices': dmx.devices, 'universes': {}};
+
+    Object.keys(config.universes).forEach(key => {
+      response.universes[key] = config.universes[key].devices;
+    });
+
+    res.json(response);
+  });
+
+  app.get('/state/:universe', (req, res) => {
+    if (!(req.params.universe in dmx.universes)) {
+      res.status(404).json({'error': 'universe not found'});
+      return;
+    }
+
+    res.json({'state': dmx.universeToObject(req.params.universe)});
+  });
+
+  app.post('/state/:universe', (req, res) => {
+    if (!(req.params.universe in dmx.universes)) {
+      res.status(404).json({'error': 'universe not found'});
+      return;
+    }
+
+    dmx.update(req.params.universe, req.body);
+    res.json({'state': dmx.universeToObject(req.params.universe)});
+  });
+
+  app.post('/animation/:universe', (req, res) => {
+    try {
+      const universe = dmx.universes[req.params.universe];
+
+      // preserve old states
+      const old = dmx.universeToObject(req.params.universe);
+
+      const animation = new A();
+
+      for (const step in req.body) {
+        console.log("add animation step "+JSON.stringify(req.body[step].to)+" "+req.body[step].duration+" "+req.body[step].options);
+        animation.add(
+          req.body[step].to,
+          req.body[step].duration || 0,
+          req.body[step].options || {}
+        );
+      }
+      animation.add(old, 0);
+      console.log("Start animation on universe : "+universe);
+      animation.run(universe, function(){
+        console.log("Animation finished !");
+      });
+      res.json({'success': true});
+    } catch (e) {
+      console.log(e);
+      res.json({'error': String(e)});
+    }
+  });
+
+  io.sockets.on('connection', socket => {
+    socket.emit('init', {'devices': dmx.devices, 'setup': config});
+
+    socket.on('request_refresh', () => {
+      for (const universe in config.universes) {
+        socket.emit('update', universe, dmx.universeToObject(universe));
+      }
+    });
+
+    socket.on('update', (universe, update) => {
+      dmx.update(universe, update);
+    });
+
+    dmx.on('update', (universe, update) => {
+      socket.emit('update', universe, update);
+    });
+  });
+}
+
+DMXWeb();
+
+console.log("connect to http://localhost:8080");
+
+
+

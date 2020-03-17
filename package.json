@@ -16,6 +16,7 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "@node-dmx/dmx-library": "^0.2.0",
     "@shopify/draggable": "^1.0.0-beta.8",
     "abletonlink": "0.0.7",
     "artnet": "^1.4.0",

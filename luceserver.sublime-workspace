@@ -1,0 +1,413 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"un",
+				"universeId"
+			],
+			[
+				"uni",
+				"universeId"
+			],
+			[
+				"ia",
+				"iagoSaid"
+			],
+			[
+				"font-s",
+				"font-style\tproperty"
+			],
+			[
+				"scr",
+				"scrollTop"
+			],
+			[
+				"wi",
+				"width\tproperty"
+			],
+			[
+				"res",
+				"refresh"
+			],
+			[
+				"full",
+				"fullscreen"
+			],
+			[
+				"fulls",
+				"requestFullScreen"
+			],
+			[
+				"getU",
+				"getUserIP"
+			],
+			[
+				"loca",
+				"localIp"
+			],
+			[
+				"setT",
+				"setInterval"
+			],
+			[
+				"fon",
+				"fontsize"
+			],
+			[
+				"font",
+				"fontsize"
+			],
+			[
+				"sp",
+				"speedBut"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"speed",
+				"speedBut"
+			],
+			[
+				"spd",
+				"spdIndex"
+			],
+			[
+				"k",
+				"keyup"
+			],
+			[
+				"back",
+				"background-color\tproperty"
+			],
+			[
+				"button",
+				"buttonsVisible"
+			],
+			[
+				"butt",
+				"buttonsVisible"
+			],
+			[
+				"tex",
+				"text-align\tproperty"
+			],
+			[
+				"re",
+				"removeClass"
+			],
+			[
+				"border-col",
+				"border-color\tproperty"
+			],
+			[
+				"content",
+				"contentobj"
+			],
+			[
+				"select",
+				"selectProj"
+			],
+			[
+				"v",
+				"value"
+			],
+			[
+				"ch",
+				"change"
+			],
+			[
+				"img",
+				"img_list"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				"Syntax Check"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"pack",
+				"Package Control: Discover Packages"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"install pack",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Install Package Control"
+			],
+			[
+				"script",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"Snippet: h",
+				"Snippet: html"
+			],
+			[
+				"html",
+				"HTML: Encode Special Characters"
+			],
+			[
+				"Snippet: ",
+				"Snippet: html"
+			],
+			[
+				"",
+				"Snippet: Function"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 136.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/leo/Documents/GitHub/luceserver",
+		"/Users/leo/Documents/GitHub/luceserver/public"
+	],
+	"file_history":
+	[
+		"/Volumes/backMeUp/Docker/iagotchi-lasti-/README.md",
+		"/Volumes/backMeUp/Docker/iagotchi-lasti/.gitignore",
+		"/Users/leo/Desktop/coex_lux_qlab4.5.qlab4",
+		"/Users/leo/Documents/GitHub/luceserver/dmx-web.json",
+		"/Users/leo/Documents/GitHub/hhnServer/public/index.html",
+		"/Users/leo/Documents/GitHub/luceserver/public/index2.html",
+		"/Users/leo/Documents/GitHub/luceserver/node_modules/@node-dmx/dmx-library/index.js",
+		"/Users/leo/Documents/GitHub/luceserver/node_modules/@node-dmx/dmx-library/anim.js",
+		"/Users/leo/Documents/GitHub/luceserver/app.js",
+		"/private/tmp/tnt26980/mount/Extra/tnt.sfv",
+		"/Users/leo/Documents/GitHub/luceserver/node_modules/@node-dmx/dmx-library/drivers/artnet.js",
+		"/Users/leo/Documents/GitHub/luceserver/node_modules/dmx-web/readme.md",
+		"/Users/leo/Documents/GitHub/luceserver/node_modules/dmx/drivers/artnet.js",
+		"/Users/leo/electron-quick-start/main.js",
+		"/Volumes/backMeUp/Docker/iagotchi-lasti/iagotchi-bot/bottle.py",
+		"/Users/leo/Documents/workspace/IAGORECO/src/osc.py",
+		"/Volumes/backMeUp/Docker/iagotchi-lasti/iagotchi-bot/chatscript_externals.py",
+		"/Volumes/backMeUp/Docker/iagotchi-lasti/iagotchi-bot/requirements.txt",
+		"/Volumes/backMeUp/Docker/iagotchi-lasti/iagotchi-bot/osc.py",
+		"/Users/leo/Documents/workspace/IAGOGENERATOR/.gitignore",
+		"/Volumes/backMeUp/Docker/iagotchi-lasti/iagotchi-bot/data/config.docker.json",
+		"/Users/leo/Documents/workspace/COEXISTENCE/lithosys/src/index.html",
+		"/Volumes/backMeUp/Docker/iagotchi-lasti/iagotchi-bot/pyosc.py",
+		"/Volumes/backMeUp/Docker/iagotchi-lasti/data/config.json",
+		"/Volumes/backMeUp/Docker/iagotchi-lasti/README.md",
+		"/Volumes/backMeUp/Docker/iagotchi-lasti/iagotchi-bot/main.py",
+		"/Volumes/backMeUp/Docker/iagotchi-lasti/data/config.json.bak.json",
+		"/Volumes/backMeUp/Docker/iagotchi-lasti/iagotchi-bot/botresponse.py",
+		"/Users/leo/Documents/GitHub/g5interspecies/public/index.html",
+		"/Users/leo/Documents/GitHub/g5interspecies/app.js",
+		"/Users/leo/Documents/GitHub/g5interspecies/public/controller.html",
+		"/Applications/MAMP/htdocs/prompter/textes/texte4.txt",
+		"/Applications/MAMP/htdocs/prompter/textes/texte3.txt",
+		"/Applications/MAMP/htdocs/prompter/textes/texte1.txt",
+		"/Applications/MAMP/htdocs/prompter/textes/texte2.txt",
+		"/Applications/MAMP/htdocs/prompter/index.html",
+		"/Users/leo/Documents/GitHub/g5interspecies/public/id_animal.html",
+		"/Applications/MAMP/htdocs/prompter/prompter.html",
+		"/Applications/MAMP/htdocs/prompter/textes/texte6.txt",
+		"/Applications/MAMP/htdocs/prompter/textes/texte5.txt",
+		"/Users/leo/Documents/GitHub/g5interspecies/public/referendum.html",
+		"/Applications/MAMP/htdocs/index.html",
+		"/Users/leo/Documents/GitHub/g5interspecies/public/id_mineral.html",
+		"/Applications/MAMP/htdocs/prompter/textes/texte7.txt",
+		"/Users/leo/Documents/workspace/dmx/readme.md",
+		"/Users/leo/Desktop/coexistence_technique/CO_EXISTENCE_2.asc",
+		"/Applications/MAMP/htdocs/zacue/prompter.html",
+		"/Applications/MAMP/htdocs/zacue/prompter2.html",
+		"/Users/leo/Downloads/jquery-autoscroll-master/examples/autoscroll.html",
+		"/Users/leo/Desktop/zacue/prompter.html",
+		"/Users/leo/Desktop/zacue/hane.js",
+		"/Users/leo/Desktop/zacue/prompter2.html",
+		"/Users/leo/Desktop/zacue/index.html",
+		"/Users/leo/Desktop/zacue/hane.min.js",
+		"/Users/leo/Desktop/zacue/hammer.min.js",
+		"/Users/leo/Desktop/zacue/prompter.php",
+		"/Applications/MAMP/htdocs/CV.sublime-workspace",
+		"/Applications/MAMP/htdocs/test.html",
+		"/Applications/MAMP/htdocs/CV.sublime-project",
+		"/Applications/MAMP/logs/apache_error.log",
+		"/Applications/MAMP/logs/php_error.log"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"universe_id",
+			"EnttecODE"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 108.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "luceserver.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 360.0,
+		"last_filter": "filename",
+		"selected_items":
+		[
+			[
+				"filename",
+				"getFileName"
+			]
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 340.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

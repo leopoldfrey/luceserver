@@ -1,0 +1,89 @@
+{
+	"title": "DMX Dashboard",
+	"_comment1": "To have a different page title change _title to title.",
+	"server": {
+		"listen_port": 8080,
+		"listen_host": "::",
+
+		"_uid": "www-data",
+		"_gid": "www-data",
+		"_comment1": "To drop privileges change the '_uid' and '_gid' keys to 'uid' and 'gid'.",
+		"_comment2": "On macOS uid and gid must be set in the launchd script."
+	},
+	"presets": [
+		{
+			"label": "Zeros",
+			"values": {
+				"test": { "10": 0, "20": 0 }
+			}
+		},
+		{
+			"label": "10 @ 255",
+			"values": {
+				"test": { "10": 255 }
+			}
+		},
+		{
+			"label": "10 @ 0",
+			"values": {
+				"test": { "10": 0 }
+			}
+		},
+		{
+			"label": "20 @ 127",
+			"values": {
+				"test": { "20": 127 }
+			}
+		},
+		{
+			"label": "all @255",
+			"values": {
+				"test": { "10": 255, "20": 255 }
+			}
+		}
+	],
+	"universes": {
+		"test": {
+			"output": {
+				"driver": "null",
+				"universe": 0
+			},
+			"devices": [
+				{
+					"type": "generic",
+					"address": 10
+				},
+				{
+					"type": "generic",
+					"address": 20
+				}
+			]
+		}
+	},
+	"animPresets": [{
+		"_comment1": "Change _animPresets to animPresets for a new tab with all preset animations",
+		"_comment2": "Check documentation for how to make animations",
+		"label": "test",
+		"anim": {
+			"test": [{
+					"to": {
+						"10": 0,
+						"20": 0
+					}
+				},
+				{
+					"to": {
+						"10": 255
+					},
+					"duration": 2000
+				},
+				{
+					"to": {
+						"20": 255
+					},
+					"duration": 1000
+				}
+			]
+		}
+	}]
+}
